@@ -16,8 +16,7 @@ ma('^/koko/$').returns = function(req,res){
 
 //json response
 ma('^/koko.json$').returns.json = function(req,res){
-    res.writeObject({"message" : "Hello!"});    
-    res.end();
+    res.end({"message" : "Hello!"});    
 };
 
 //only route to GET
@@ -39,8 +38,7 @@ ma('^/user/(name)/$').returns = function(req,res){
 //only route to GET with JSON output
 ma.get('^/loko.json$').returns.json = function(req,res){
 
-    res.writeObject({"message" : "Hello!"});    
-    res.end();
+    res.end({"message" : "Hello!"});    
 };
 
 //POST params
@@ -52,9 +50,18 @@ ma.post('^/yoyo$').returns = function(req,res){
 
 //html template
 ma.post('^/user/(name)/matches/$').returns.template("matches.mustache").as.html = function(req,res){
-    res.writeObject({name : req.$1});    
-    res.end(val);
+    res.end({name : req.$1});    
 };
+
+//static
+ma("^/.*$").returns.static = "www/";
+
+//rewrite
+ma("^/(momo)/$").returns.rewrite = "/query/?q=$1";
+
+//proxy 
+ma("^/backend/$").returns.proxy = "http://localhost:8080";
+
 
 ma.start();
 
