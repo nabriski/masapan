@@ -10,12 +10,12 @@ successor of Ys
 var m = new require('masapan');
 
 //generic response
-m.any('^/koko/$').returns = function(req,res){
+m.every('^/koko/$').returns = function(req,res){
   res.end("Hello!");  
 };
 
 //json response
-m.any('^/koko.json$').returns.json = function(req,res){
+m.every('^/koko.json$').returns.json = function(req,res){
     res.end({"message" : "Hello!"});    
 };
 
@@ -30,7 +30,7 @@ m.get('^/loko/$').returns= function(req,res){
 };
 
 //match groups
-m.any('^/user/(name)/$').returns = function(req,res){
+m.every('^/user/(name)/$').returns = function(req,res){
   res.end("Hello "+req.$1);  
 };
 
