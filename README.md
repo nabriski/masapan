@@ -7,7 +7,7 @@ API Only At This Time
 successor of Ys
 
 ```javascript
-var ma = require('masapan');
+var ma = new require('masapan');
 
 //generic response
 ma('^/koko/$').returns = function(req,res){
