@@ -54,13 +54,13 @@ ma.post('^/user/(name)/matches/$').returns.template("matches.mustache").as.html 
 };
 
 //static
-ma("^/.*$").returns.static = "www/";
+ma.static("^/.*$").returns = "www/";
 
 //rewrite
-ma("^/(momo)/$").returns.rewrite = "/query/?q=$1";
+ma.rewrite("^/(momo)/$").returns = "/query/?q=$1";
 
 //proxy 
-ma("^/backend/$").returns.proxy = "http://localhost:8080";
+ma.proxy("^/backend/$").returns = "http://localhost:8080";
 
 
 ma.start();
