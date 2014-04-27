@@ -6,7 +6,7 @@ API Only At This Time
 
 successor of Ys
 
-```
+```javascript
 var ma = require('masapan');
 
 //generic response
