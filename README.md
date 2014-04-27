@@ -10,45 +10,48 @@ successor of Ys
 var ma = require('masapan');
 
 //generic response
-ma['^/koko/$'] = function(req,res){
+ma('^/koko/$').returns = function(req,res){
   res.end("Hello!");  
 };
 
 //json response
-ma['^/koko.json$'].json = function(req,res){
-
+ma('^/koko.json$').returns.json = function(req,res){
     res.writeObject({"message" : "Hello!"});    
     res.end();
-
 };
 
 //only route to GET
-ma['^/loko/$'].get = function(req,res){
+ma.get('^/loko/$').returns = function(req,res){
   res.end("Hello!");  
 };
 
 //query params
-ma['^/loko/$'].get = function(req,res){
+ma.get('^/loko/$').returns= function(req,res){
   res.end("Hello "+req.params.name);  
 };
 
 //match groups
-ma['^/user/(name)/$'] = function(req,res){
+ma(^/user/(name)/$).returns = function(req,res){
   res.end("Hello "+req.$1);  
 };
 
 
 //only route to GET with JSON output
-ma['^/loko.json$'].json.get = //or
-ma['^/loko.json$'].get.json = function(req,res){
+ma.get(^/loko.json$).returns.json = function(req,res){
 
     res.writeObject({"message" : "Hello!"});    
     res.end();
 };
 
 //POST params
-ma['^/yoyo$'].post = function(req,res){
+ma.post(^/yoyo$).returns = function(req,res){
     var val = parseInt(req.params.value) + 1;    
+    res.end(val);
+};
+
+//template
+ma.post(^/user/(name)/matches/$).with.template("matches.mustache").returns = function(req,res){
+    res.writeObject({name : req.$1});    
     res.end(val);
 };
 
