@@ -10,12 +10,12 @@ successor of Ys
 var m = new require('masapan');
 
 //generic response
-m.on.any('^/koko/$').return(function(req,res){
+m.on.all('^/koko/$').return(function(req,res){
   res.end("Hello!");  
 });
 
 //json response
-m.on.any('^/koko.json$').return.json(function(req,res){
+m.on.all('^/koko.json$').return.json(function(req,res){
     res.end({"message" : "Hello!"});    
 });
 
@@ -30,7 +30,7 @@ m.on.get('^/loko/$').return(function(req,res){
 });
 
 //match groups
-m.on.any('^/user/(name)/$').return(function(req,res){
+m.on.all('^/user/(name)/$').return(function(req,res){
   res.end("Hello "+req.$1);  
 });
 
@@ -54,13 +54,13 @@ m.on.post('^/user/(name)/matches/$').return.template("matches.mustache").as.html
 });
 
 //static
-m.on.any("^/.*$").return.static("www/");
+m.on.all("^/.*$").return.static("www/");
 
 //rewrite
-m.on.any("^/(momo)/$").return.rewrite("/query/?q=$1");
+m.on.all("^/(momo)/$").return.rewrite("/query/?q=$1");
 
 //proxy 
-m.any.proxy("^/backend/$").return.proxy("http://localhost:8080");
+m.all.proxy("^/backend/$").return.proxy("http://localhost:8080");
 
 
 m.start();
