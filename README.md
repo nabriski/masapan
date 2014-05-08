@@ -10,57 +10,57 @@ successor of Ys
 var m = new require('masapan');
 
 //generic response
-m.every('^/koko/$').returns = function(req,res){
+m.on.any('^/koko/$').return(function(req,res){
   res.end("Hello!");  
-};
+});
 
 //json response
-m.every('^/koko.json$').returns.json = function(req,res){
+m.on.any('^/koko.json$').return.json(function(req,res){
     res.end({"message" : "Hello!"});    
-};
+});
 
 //only route to GET
-m.get('^/loko/$').returns = function(req,res){
+m.on.get('^/loko/$').return(function(req,res){
   res.end("Hello!");  
-};
+});
 
 //query params
-m.get('^/loko/$').returns= function(req,res){
+m.on.get('^/loko/$').return(function(req,res){
   res.end("Hello "+req.params.name);  
-};
+});
 
 //match groups
-m.every('^/user/(name)/$').returns = function(req,res){
+m.on.any('^/user/(name)/$').return(function(req,res){
   res.end("Hello "+req.$1);  
-};
+});
 
 
 //only route to GET with JSON output
-m.get('^/loko.json$').returns.json = function(req,res){
+m.on.get('^/loko.json$').return.json(function(req,res){
 
     res.end({"message" : "Hello!"});    
-};
+});
 
 //POST params
-m.post('^/yoyo$').returns = function(req,res){
+m.on.post('^/yoyo$').return(function(req,res){
 
     var val = parseInt(req.params.value) + 1;    
     res.end(val);
-};
+});
 
 //html template
-m.post('^/user/(name)/matches/$').returns.template("matches.mustache").as.html = function(req,res){
+m.on.post('^/user/(name)/matches/$').return.template("matches.mustache").as.html(function(req,res){
     res.end({name : req.$1});    
-};
+});
 
 //static
-m.static("^/.*$").returns = "www/";
+m.on.any("^/.*$").return.static("www/");
 
 //rewrite
-m.rewrite("^/(momo)/$").returns = "/query/?q=$1";
+m.on.any("^/(momo)/$").return.rewrite("/query/?q=$1");
 
 //proxy 
-m.proxy("^/backend/$").returns = "http://localhost:8080";
+m.any.proxy("^/backend/$").return.proxy("http://localhost:8080");
 
 
 m.start();
