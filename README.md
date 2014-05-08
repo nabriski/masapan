@@ -60,7 +60,7 @@ m.on.all("^/.*$").return.static("www/");
 m.on.all("^/(momo)/$").return.rewrite("/query/?q=$1");
 
 //proxy 
-m.all.proxy("^/backend/$").return.proxy("http://localhost:8080");
+m.on.all.proxy("^/backend/$").return.proxy("http://localhost:8080");
 
 
 m.start();
