@@ -49,7 +49,7 @@ m.on.post('^/yoyo$').return(function(req,res){
 });
 
 //html template
-m.on.post('^/user/(name)/matches/$').return.template("matches.mustache").as.html(function(req,res){
+m.on.post('^/user/(name)/matches/$').with.template("matches.mustache").return.html(function(req,res){
     res.end({name : req.$1});    
 });
 
